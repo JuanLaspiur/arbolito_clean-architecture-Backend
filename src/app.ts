@@ -1,0 +1,1 @@
+console.log('Base de Typescript')

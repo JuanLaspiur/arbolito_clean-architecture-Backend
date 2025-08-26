@@ -28,12 +28,11 @@ npm run dev
 
 homily-api/
 ├─ src/
-│  ├─ app.ts        
-│  └─ domain/ 
-|  └─ infrastructure/
-|  └─ presentation/ 
-|  └─ config/ 
+│  ├─ app.ts
+│  ├─ domain/
+│  ├─ infrastructure/
+│  ├─ presentation/
+│  └─ config/
 ├─ package.json
 ├─ tsconfig.json
 └─ .env
-

@@ -3,13 +3,13 @@ export class HomilyController {
     constructor() { }
 
     getAllHomily(req: Request, res: Response) {
-        res.json('getAllHomilias')
+        res.json('getAll')
     }
     getTodaysHomily(req: Request, res: Response) {
-        res.json('getTodaysHomily');
+        res.json('getTodays');
     }
     getThisWeeksHomily(req: Request, res: Response) {
-        res.json('getThisWeeksHomily');
+        res.json('getThisWeeks');
     }
 
 }

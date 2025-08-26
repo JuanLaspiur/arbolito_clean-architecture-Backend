@@ -13,8 +13,9 @@ constructor(port:number, routes:Router){
 }
 
  private middlewares():void{
-  this.app.use(this.routes);
-  this.app.use(express.json()); 
+  this.app.use(express.urlencoded({ extended: true }));
+  this.app.use(express.json());
+     this.app.use(this.routes);
 }
 
 public async start(): Promise<void>{

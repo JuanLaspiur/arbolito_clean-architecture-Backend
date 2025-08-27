@@ -14,7 +14,6 @@ export class AuthDataSourceImpl implements AuthDataSource {
             if(!BcryptAdapter.compare(password, user.password)) throw CustomError.unauthorized('Incorrect password');
             
             return new UserEntity(user._id.toString(), user.name, email, user.password, user.role);
-
         } catch (error) {
             if (error instanceof CustomError) {
                 throw error;
@@ -25,10 +24,9 @@ export class AuthDataSourceImpl implements AuthDataSource {
     async register(registerDto: RegisterDto): Promise<UserEntity> {
         try {
             const { name, password, email } = registerDto;
-                   // verificar si existe el usuario
+            // verificar si existe el usuario
             const exists = await UserModel.findOne({email});
             if(exists) throw CustomError.badRequest('User already exists');
-            // encriptar la contraseño
 
             // mappear la respuesta a la entidad
             const user = await UserModel.create({
@@ -38,7 +36,7 @@ export class AuthDataSourceImpl implements AuthDataSource {
             });
             await user.save();
           // TODO: 
-            return new UserEntity(user.id, name, email, password, user.role);
+            return new UserEntity(user.id, name, email, user.password, user.role);
         } catch (error) {
             if (error instanceof CustomError) {
                 throw error;

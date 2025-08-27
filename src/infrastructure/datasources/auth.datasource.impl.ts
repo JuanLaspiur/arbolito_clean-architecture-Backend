@@ -2,6 +2,7 @@ import { BcryptAdapter } from "../../config/bcrypt";
 import { UserModel } from "../../data/mogodb";
 import { AuthDataSource, CustomError, UserEntity } from "../../domain";
 import { LoginDto, RegisterDto } from "../../domain/dtos";
+import { UserMapper } from "../mappers/user.mapper";
 
 
 type HashFunction = (password: string) => string;
@@ -21,7 +22,7 @@ export class AuthDataSourceImpl implements AuthDataSource {
             if(!user) throw CustomError.badRequest('User does not exist');
             if(!this.comparePassword(password, user.password)) throw CustomError.unauthorized('Incorrect password');
             
-            return new UserEntity(user._id.toString(), user.name, email, user.password, user.role);
+            return UserMapper.userEntityFromObject(user);
         } catch (error) {
             if (error instanceof CustomError) {
                 throw error;
@@ -40,8 +41,7 @@ export class AuthDataSourceImpl implements AuthDataSource {
                 email
             });
             await user.save();
-          // TODO: 
-            return new UserEntity(user.id, name, email, user.password, user.role);
+            return UserMapper.userEntityFromObject(user);
         } catch (error) {
             if (error instanceof CustomError) {
                 throw error;

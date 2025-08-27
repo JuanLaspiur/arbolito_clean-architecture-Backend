@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { TreeRoutes } from "./Tree/routes";
+import { TreeRoutes } from "./tree/routes";
 import { AuthRoutes } from "./auth/routes";
 
 export class AppRoutes {

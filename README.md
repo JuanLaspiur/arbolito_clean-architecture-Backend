@@ -2,11 +2,7 @@
 **Version:** 1.0.0  
 **Node.js recomendado:** v22.16.0 (64-bit)
 
-API sencilla para manejar homilías, construida con **TypeScript** y **Express**.
 
-## Descripción
-
-Este proyecto es una API REST básica que permite manejar homilías. Está construida con **Node.js**, **Express** y **TypeScript**, y se ejecuta en modo desarrollo usando `ts-node-dev`.
 
 ## Tecnologías
 

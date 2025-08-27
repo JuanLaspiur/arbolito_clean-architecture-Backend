@@ -3,17 +3,20 @@ import { RegisterDto, LoginDto } from "../../domain/dtos";
 import { AuthRepository } from "../../domain";
 
 export class AuthController {
-    constructor(private readonly authRepositoy : AuthRepository) { }
+constructor(private readonly authRepository: AuthRepository) {}
+
 
     register(req: Request, res: Response) {
         const [error, registerDto] = RegisterDto.create(req.body);
         if (error) {
             return res.status(400).json({ error });
         }
-        this.authRepositoy.register(registerDto!)
-        .then(user=> res.status(200).json(user))
-        .catch(error => res.status(500).json(error));
-        ;
+         this.authRepository.register(registerDto!)
+         .then(user=> res.status(200).json(user))
+         .catch(error => res.status(500).json(error))
+        
+        
+       
     }
 
     login(req: Request, res: Response) {
@@ -21,7 +24,7 @@ export class AuthController {
         if (error) {
             return res.status(400).json({ error });
         }
-       this.authRepositoy.login(loginDto!)
+       this.authRepository.login(loginDto!)
        .then(user=> res.status(200).json(user))
        .catch(error => res.status(500).json(error));
     }

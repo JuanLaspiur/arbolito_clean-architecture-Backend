@@ -3,17 +3,18 @@ import { AuthController } from "./controller";
 import { AuthDataSourceImpl, AuthRepositoryImpl } from "../../infrastructure";
 
 export class AuthRoutes {
-    static get routes():Router {
-    
-    const datasource = new AuthDataSourceImpl();    
-    const authRepositoy = new AuthRepositoryImpl(datasource);    
+    static get routes(): Router {
 
-    const controller = new AuthController(authRepositoy);
+        const datasource = new AuthDataSourceImpl();
+        const authRepositoy = new AuthRepositoryImpl(datasource);
 
-    const router = Router();
-    router.post('/register',controller.register);
-    router.post('/login',controller.login);
+        const controller = new AuthController(authRepositoy);
 
-    return router;
+        const router = Router();
+        router.post('/register', controller.register.bind(controller));
+        router.post('/login', controller.login.bind(controller));
+
+
+        return router;
     }
 }

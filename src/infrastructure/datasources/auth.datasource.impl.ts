@@ -30,23 +30,33 @@ export class AuthDataSourceImpl implements AuthDataSource {
             throw CustomError.internalServer();
         }
     }
-    async register(registerDto: RegisterDto): Promise<UserEntity> {
-        try {
-            const { name, password, email } = registerDto;
-            const exists = await UserModel.findOne({email});
-            if(exists) throw CustomError.badRequest('User already exists');
-            const user = await UserModel.create({
-                name,
-                password: this.hashPassword(password),
-                email
-            });
-            await user.save();
-            return UserMapper.userEntityFromObject(user);
-        } catch (error) {
-            if (error instanceof CustomError) {
-                throw error;
-            }
-            throw CustomError.internalServer();
-        }
+async register(registerDto: RegisterDto): Promise<UserEntity> {
+  try {
+    const { firstName, lastName, password, email, username, phone } = registerDto;
+
+    const exists = await UserModel.findOne({ email });
+    if (exists) throw CustomError.badRequest('User already exists');
+
+    const user = await UserModel.create({
+      firstName,
+      lastName,
+      email,
+      username,
+      phone,
+      password: await this.hashPassword(password), 
+      role: 'user',
+      isActive: true,
+    });
+
+    await user.save();
+
+    return UserMapper.userEntityFromObject(user);
+  } catch (error) {
+    if (error instanceof CustomError) {
+      throw error;
     }
+    throw CustomError.internalServer();
+  }
+}
+
 }

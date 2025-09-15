@@ -1,5 +1,4 @@
 import { VacationStatus } from "../../entities/vacation.entity";
-import { CustomError } from "../../errors/custom.error";
 
 export interface CreateVacationDtoProps {
   userId: number;

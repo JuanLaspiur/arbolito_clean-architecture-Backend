@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { CreateVacationDto } from "../../domain/dtos";
+import { CreateVacationDto, UpdateVacationDto } from "../../domain/dtos";
 import { VacationRepository, CustomError } from "../../domain";
 
 export class VacationController {
@@ -22,4 +22,15 @@ createVacation(req: Request, res: Response) {
          .then(vacation=> res.status(200).json(vacation))
          .catch(error => this.handleError(error, res))
     }
+
+ updateVacation(req: Request, res: Response) {
+        const [error, updateVacationDto] = UpdateVacationDto.create(req.body);
+        if (error) {
+            return res.status(400).json({ error });
+        }
+         this.vacationRepository.updateVacation(updateVacationDto!)
+         .then(vacation=> res.status(200).json(vacation))
+         .catch(error => this.handleError(error, res))
+    }   
+    
 }

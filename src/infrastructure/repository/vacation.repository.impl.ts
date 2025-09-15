@@ -1,6 +1,6 @@
 // infrastructure/repositories/vacation.repository.ts
 import { VacationDataSource, VacationRepository, VacationEntity } from "../../domain";
-import { CreateVacationDto } from "../../domain/dtos";
+import { CreateVacationDto, UpdateVacationDto } from "../../domain/dtos";
 
 export class VacationRepositoryImpl implements VacationRepository {
 
@@ -8,6 +8,10 @@ export class VacationRepositoryImpl implements VacationRepository {
 
   async createVacation(dto: CreateVacationDto): Promise<VacationEntity> {
     return this.vacationDataSource.createVacation(dto);
+  }
+
+  async updateVacation(dto: UpdateVacationDto): Promise<VacationEntity|null> {
+    return this.vacationDataSource.updateVacation(dto);
   }
 
 }

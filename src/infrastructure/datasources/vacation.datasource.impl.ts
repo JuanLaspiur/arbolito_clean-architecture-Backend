@@ -1,7 +1,7 @@
 // infrastructure/datasources/vacation.datasource.ts
 import { VacationEntity } from "../../domain/entities/vacation.entity";
 import { VacationModel } from "../../data/mogodb";
-import { CreateVacationDto } from "../../domain/dtos";
+import { CreateVacationDto, UpdateVacationDto } from "../../domain/dtos";
 import { VacationMapper } from "../mappers/vacation.mapper";
 import { CustomError } from "../../domain/errors/custom.error";
 
@@ -45,20 +45,27 @@ export class VacationDataSourceImp implements VacationDataSourceImp {
     }
   }
 
-  async updateVacation(id: string, update: Partial<CreateVacationDto>): Promise<VacationEntity | null> {
-    try {
-      const vacation = await VacationModel.findByIdAndUpdate(
-        id,
-        { ...update, startDate: update.startDate ? new Date(update.startDate) : undefined,
-                   endDate: update.endDate ? new Date(update.endDate) : undefined },
-        { new: true }
-      );
-      if (!vacation) return null;
-      return VacationMapper.toEntity(vacation);
-    } catch (error) {
-      throw CustomError.internalServer();
-    }
+async updateVacation(updateDto: UpdateVacationDto): Promise<VacationEntity | null> {
+  try {
+    const { id, ...updateFields } = updateDto;
+
+    const vacation = await VacationModel.findByIdAndUpdate(
+      id,
+      {
+        ...updateFields,
+        startDate: updateFields.startDate ? new Date(updateFields.startDate) : undefined,
+        endDate: updateFields.endDate ? new Date(updateFields.endDate) : undefined
+      },
+      { new: true }
+    );
+
+    if (!vacation) return null;
+    return VacationMapper.toEntity(vacation);
+  } catch (error) {
+    throw CustomError.internalServer();
   }
+}
+
 
   async deleteVacation(id: string): Promise<boolean> {
     try {

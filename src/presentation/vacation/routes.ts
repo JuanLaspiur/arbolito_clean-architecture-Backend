@@ -10,8 +10,8 @@ export class VacationRoutes {
         const controller = new VacationController(vacationRepository);
 
         const router = Router();
-        router.post('/createVacation', controller.createVacation.bind(controller));
-
+        router.post('/create', controller.createVacation.bind(controller));
+        router.put('/update', controller.updateVacation.bind(controller));
         return router;
     }
 }

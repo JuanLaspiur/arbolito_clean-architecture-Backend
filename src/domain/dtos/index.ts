@@ -8,3 +8,4 @@ export * from './tree/create-tree.dto';
 
 // vacation
 export * from './vacation/createVacation.dto';
+export * from './vacation/updateVacation.dto'

@@ -3,9 +3,10 @@ export * from './auth/login.dto';
 export * from './auth/register.dto';
 
 
-// tree
-export * from './tree/create-tree.dto';
 
 // vacation
 export * from './vacation/createVacation.dto';
 export * from './vacation/updateVacation.dto'
+
+// notification
+export * from './notification/createNotification.dto';

@@ -1,4 +1,3 @@
-// infrastructure/repositories/vacation.repository.ts
 import { VacationDataSource, VacationRepository, VacationEntity } from "../../domain";
 import { CreateVacationDto, UpdateVacationDto } from "../../domain/dtos";
 
